@@ -1,0 +1,31 @@
+{
+  "name": "express-endpoint-wrapper",
+  "version": "2021.4.0",
+  "description": "Provides a wrapper which could generalize some endpoint-functionality for express-endpoints",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grongworks/express-endpoint-wrapper.git"
+  },
+  "keywords": [
+    "express",
+    "node",
+    "nodejs",
+    "grong",
+    "works",
+    "grongworks",
+    "expressjs",
+    "middleware",
+    "wrapper",
+    "endpoints"
+  ],
+  "author": "grongworks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grongworks/express-endpoint-wrapper/issues"
+  },
+  "homepage": "https://github.com/grongworks/express-endpoint-wrapper#readme"
+}
