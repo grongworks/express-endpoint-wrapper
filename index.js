@@ -4,7 +4,6 @@ module.exports = function ({
     callback = () => {},
     errors = [{
         status: undefined,
-        message: undefined,
         byInstance: undefined,
         byMessage: undefined,
         errorCallback: ({res, status, message}) => console.error(`[ERROR] ${status}:${message}`),
@@ -28,7 +27,7 @@ module.exports = function ({
                         return byMessage.errorCallback({
                             res: response,
                             status: byMessage.status,
-                            ...(!!byMessage.message && { message: byMessage.message })
+                            ...(!!error.message && { message: error.message })
                         });
                     }
 

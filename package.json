@@ -1,6 +1,6 @@
 {
   "name": "express-endpoint-wrapper",
-  "version": "2021.4.11",
+  "version": "2021.4.13",
   "description": "Provides a wrapper which could generalize some endpoint-functionality for express-endpoints",
   "main": "index.js",
   "scripts": {
