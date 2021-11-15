@@ -4,7 +4,10 @@
   "description": "Provides a wrapper which could generalize some endpoint-functionality for express-endpoints",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "npm:publish:patch": "npm version patch --no-git-tag-version && npm publish",
+    "npm:publish:minor": "npm version minor --no-git-tag-version && npm publish",
+    "npm:publish:major": "npm version major --no-git-tag-version && npm publish"
   },
   "repository": {
     "type": "git",
