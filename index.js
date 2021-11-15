@@ -1,11 +1,13 @@
+const isInstanceOf = require("instance-of");
+
 module.exports = function ({
     callback = () => {},
     errors = [{
-        httpStatusCode: undefined,
+        status: undefined,
         message: undefined,
         byInstance: undefined,
         byMessage: undefined,
-        errorCallback: () => {},
+        errorCallback: ({res, status, message}) => console.error(`[ERROR] ${status}:${message}`),
     }]
 }) {
     return async function (request, response, next) {
@@ -15,23 +17,27 @@ module.exports = function ({
             if (errors instanceof Array) {
                 if (errors.length > 0) {
                     const byMessage = errors.find(e => e.byMessage === error.message);
-                    const byInstance = errors.find(e => (!!error.byInstance && error instanceof error.byInstance));
+                    const byInstance = errors.find(e => (!!e.byInstance && isInstanceOf(error, e.byInstance)));
 
                     if (!byMessage && !byInstance) {
                         return next(error);
                     }
 
                     if (byMessage) {
+                        if (!byMessage.errorCallback) byMessage.errorCallback = ({status, message}) => console.error(`[ERROR] ${status}:${message}`);
                         return byMessage.errorCallback({
                             res: response,
-                            httpStatusCode: byMessage.httpStatusCode
+                            status: byMessage.status,
+                            ...(!!byMessage.message && { message: byMessage.message })
                         });
                     }
 
                     if (byInstance) {
+                        if (!byInstance.errorCallback) byInstance.errorCallback = ({status, message}) => console.error(`[ERROR] ${status}:${message}`);
                         return byInstance.errorCallback({
                             res: response,
-                            httpStatusCode: byInstance.httpStatusCode
+                            status: byInstance.status,
+                            ...(!!error.message && { message: error.message })
                         });
                     }
                 } else {

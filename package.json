@@ -1,6 +1,6 @@
 {
   "name": "express-endpoint-wrapper",
-  "version": "2021.4.6",
+  "version": "2021.4.11",
   "description": "Provides a wrapper which could generalize some endpoint-functionality for express-endpoints",
   "main": "index.js",
   "scripts": {
@@ -30,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/grongworks/express-endpoint-wrapper/issues"
   },
-  "homepage": "https://github.com/grongworks/express-endpoint-wrapper#readme"
+  "homepage": "https://github.com/grongworks/express-endpoint-wrapper#readme",
+  "dependencies": {
+    "instance-of": "^1.1.0"
+  }
 }
