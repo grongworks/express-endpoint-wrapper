@@ -1,7 +1,7 @@
 module.exports = function ({
     callback = () => {},
     errors = [{
-        statusCode: undefined,
+        httpStatusCode: undefined,
         message: undefined,
         byInstance: undefined,
         byMessage: undefined,
@@ -15,18 +15,24 @@ module.exports = function ({
             if (errors instanceof Array) {
                 if (errors.length > 0) {
                     const byMessage = errors.find(e => e.byMessage === error.message);
-                    const byInstance = errors.find(e => error instanceof error.byInstance);
+                    const byInstance = errors.find(e => (!!error.byInstance && error instanceof error.byInstance));
 
                     if (!byMessage && !byInstance) {
                         return next(error);
                     }
 
                     if (byMessage) {
-                        return byMessage.errorCallback({ httpStatusCode: byMessage.statusCode });
+                        return byMessage.errorCallback({
+                            res: response,
+                            httpStatusCode: byMessage.httpStatusCode
+                        });
                     }
 
                     if (byInstance) {
-                        return byInstance.errorCallback({ httpStatusCode: byInstance.statusCode });
+                        return byInstance.errorCallback({
+                            res: response,
+                            httpStatusCode: byInstance.httpStatusCode
+                        });
                     }
                 } else {
                     return next(error);
